@@ -25,12 +25,3 @@ def clean_text(text):
                 lang="en"  # set to 'de' for German special handling
                 )
     return res
-
-
-if __name__ == "__main__":
-    text = docx2txt.process("Tests/Articles/interviews.docx")
-    print(clean_text(text))
-    # print(summarize("Articles/interview2.pdf"))
-    # print(summarize("Articles/loans.html"))
-    # print(summarize("Articles/loans2.html"))
-    # print(summarize("Articles/credit.docx"))
