@@ -41,20 +41,29 @@ def upload_file():
 
 @app.route('/plaintext', methods=['POST', 'OPTIONS'])
 def extractext():
+    print("check 1")
     if request.method == 'OPTIONS':
+        print("check 2")
         return _build_cors_preflight_response()
+
     elif request.method == 'POST':
+        print("check 3")
+
         try:
+            print("check 4")
             f = request.files['file']
             file_name = f.filename
+            print("check 5")
             save_path = os.path.join(
                 app.config.get('upload_folder'), file_name)
-            file_name.save(save_path)
-
+            f.save(save_path)
+            print("check 6")
             result = text_extraction(save_path)
             return jsonify(result)
         except Exception as e:
             app.logger.info("error occurred")
+    else:
+        return jsonify("server only allows POST")
 
 
 if __name__ == "__main__":
