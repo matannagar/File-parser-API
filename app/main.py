@@ -52,5 +52,5 @@ def extractext():
         return jsonify("server only allows POST")
 
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
