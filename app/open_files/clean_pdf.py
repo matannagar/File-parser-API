@@ -1,10 +1,9 @@
-import os
-
-from tika import parser  # pip install tika
+from PyPDF2 import PdfReader
 
 
 def open_pdf(filepath):
-    raw = parser.from_file(filepath)
-    text = raw['content']
-    text = os.linesep.join([s for s in text.splitlines() if s])
+    reader = PdfReader(filepath)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text() + "\n"
     return text

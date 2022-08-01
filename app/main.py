@@ -1,13 +1,6 @@
-import shutil
-import logging
 import os
-from werkzeug.utils import secure_filename
-from pathlib import Path
-
-from flask import Flask, request, jsonify, json, make_response, Response
-from flask_cors import CORS, cross_origin
-import requests
-
+from flask import Flask, request, jsonify, make_response
+from flask_cors import CORS
 from utils import text_extraction
 
 application = app = Flask(__name__)
@@ -41,23 +34,16 @@ def upload_file():
 
 @app.route('/plaintext', methods=['POST', 'OPTIONS'])
 def extractext():
-    print("check 1")
     if request.method == 'OPTIONS':
-        print("check 2")
         return _build_cors_preflight_response()
 
     elif request.method == 'POST':
-        print("check 3")
-
         try:
-            print("check 4")
             f = request.files['file']
             file_name = f.filename
-            print("check 5")
             save_path = os.path.join(
                 app.config.get('upload_folder'), file_name)
             f.save(save_path)
-            print("check 6")
             result = text_extraction(save_path)
             return jsonify(result)
         except Exception as e:
