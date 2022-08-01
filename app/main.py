@@ -38,16 +38,16 @@ def extractext():
         return _build_cors_preflight_response()
 
     elif request.method == 'POST':
-        try:
-            f = request.files['file']
-            file_name = f.filename
-            save_path = os.path.join(
-                app.config.get('upload_folder'), file_name)
-            f.save(save_path)
-            result = text_extraction(save_path)
-            return jsonify(result)
-        except Exception as e:
-            app.logger.info("error occurred")
+        # try:
+        f = request.files['file']
+        file_name = f.filename
+        save_path = os.path.join(
+            app.config.get('upload_folder'), file_name)
+        f.save(save_path)
+        result = text_extraction(save_path)
+        return jsonify(result)
+        # except Exception as e:
+        #     app.logger.info("error occurred")
     else:
         return jsonify("server only allows POST")
 

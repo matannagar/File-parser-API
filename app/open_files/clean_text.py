@@ -1,5 +1,4 @@
 from cleantext import clean
-import docx2txt
 
 
 def clean_text(text):
