@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 from app.utils import text_extraction
+# from utils import text_extraction
 
 application = app = Flask(__name__)
 
