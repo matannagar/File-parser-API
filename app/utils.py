@@ -1,7 +1,7 @@
 import docx2txt
-from open_files.clean_html import open_html
-from open_files.clean_pdf import open_pdf
-from open_files.clean_text import clean_text
+from app.open_files.clean_html import open_html
+from app.open_files.clean_pdf import open_pdf
+from app.open_files.clean_text import clean_text
 
 
 def text_extraction(filename):
