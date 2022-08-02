@@ -1,7 +1,14 @@
 import docx2txt
-from app.open_files.clean_html import open_html
-from app.open_files.clean_pdf import open_pdf
-from app.open_files.clean_text import clean_text
+import os
+
+if os.environ.get('MODE') == 'PRODUCTION':
+    from app.open_files.clean_html import open_html
+    from app.open_files.clean_pdf import open_pdf
+    from app.open_files.clean_text import clean_text
+else:
+    from open_files.clean_html import open_html
+    from open_files.clean_pdf import open_pdf
+    from open_files.clean_text import clean_text
 
 
 def text_extraction(filename):

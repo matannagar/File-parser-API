@@ -1,7 +1,11 @@
 import os
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
-from app.utils import text_extraction
+
+if os.environ.get('MODE') == 'PRODUCTION':
+    from app.utils import text_extraction
+else:
+    from utils import text_extraction
 # from utils import text_extraction
 
 application = app = Flask(__name__)
@@ -53,5 +57,5 @@ def extractext():
         return jsonify("server only allows POST")
 
 
-# if __name__ == "__main__":
-#     app.run()
+if __name__ == "__main__":
+    app.run()
