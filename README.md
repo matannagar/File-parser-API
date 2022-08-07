@@ -1,5 +1,12 @@
 # File-parser-API
-Flask based API allowing users to send (PDF, Docx, doc, txt) files to retrieve clean text without any images, signs and so on...  
+Flask based API allowing users to send files to retrieve clean text without any images, signs and so on...  
+Create a post request, attach a file and you'll receive plain text.  
+
+#### Allowed files
+* PDF
+* Docx
+* doc
+* txt
 
 ## How To Use
 
