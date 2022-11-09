@@ -44,6 +44,7 @@ def extractext():
 
     elif request.method == 'POST':
         # try:
+        print(request.files['file'])
         f = request.files['file']
         file_name = f.filename
         save_path = os.path.join(
@@ -51,8 +52,6 @@ def extractext():
         f.save(save_path)
         result = text_extraction(save_path)
         return jsonify(result)
-        # except Exception as e:
-        #     app.logger.info("error occurred")
     else:
         return jsonify("server only allows POST")
 
