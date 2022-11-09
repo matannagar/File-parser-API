@@ -12,7 +12,6 @@ else:
 
 
 def text_extraction(filename):
-    print(filename)
     if filename[-4:] == "docx":
         text = docx2txt.process(filename)
     elif filename[-4:] == "html":
@@ -29,7 +28,7 @@ def text_extraction(filename):
     return text
 
 
-def summarize_from_web(url):
+def text_from_web(url):
     text = open_html(url)
     # remove links, specials signs, emails...
     text = clean_text(text)

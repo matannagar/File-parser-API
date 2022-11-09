@@ -3,9 +3,9 @@ from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 
 if os.environ.get('MODE') == 'PRODUCTION':
-    from app.utils import text_extraction
+    from app.utils import text_extraction, text_from_web
 else:
-    from utils import text_extraction
+    from utils import text_extraction, text_from_web
 # from utils import text_extraction
 
 application = app = Flask(__name__)
@@ -43,19 +43,34 @@ def extractext():
         return _build_cors_preflight_response()
 
     elif request.method == 'POST':
-        # try:
-        f = request.files['file']
-        file_name = f.filename
-        save_path = os.path.join(
-            app.config.get('upload_folder'), file_name)
-        f.save(save_path)
-        result = text_extraction(save_path)
-        return jsonify(result)
-        # except Exception as e:
-        #     app.logger.info("error occurred")
+        try:
+            f = request.files['file']
+            file_name = f.filename
+            save_path = os.path.join(
+                app.config.get('upload_folder'), file_name)
+            f.save(save_path)
+            result = text_extraction(save_path)
+            return jsonify(result)
+        except Exception as e:
+            return jsonify(e)
+    else:
+        return jsonify("server only allows POST")
+
+@app.route('/webtext', methods=['POST', 'OPTIONS'])
+def webText():
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response()
+
+    elif request.method == 'POST':
+        try:
+            url = request.form['url']
+            result =  text_from_web(url)
+            return jsonify(result)
+        except Exception as e:
+            return jsonify(e)
     else:
         return jsonify("server only allows POST")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
