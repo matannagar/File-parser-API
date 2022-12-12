@@ -3,9 +3,9 @@ from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 
 if os.environ.get('MODE') == 'PRODUCTION':
-    from app.utils import text_extraction, text_from_web
+    from app.utils import text_extraction, text_from_web, delete_files
 else:
-    from utils import text_extraction, text_from_web
+    from utils import text_extraction, text_from_web, delete_files
 # from utils import text_extraction
 
 application = app = Flask(__name__)
@@ -50,6 +50,7 @@ def extractext():
                 app.config.get('upload_folder'), file_name)
             f.save(save_path)
             result = text_extraction(save_path)
+            delete_files('./tmp')
             return jsonify(result)
         except Exception as e:
             return jsonify(e)
