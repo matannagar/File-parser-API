@@ -11,20 +11,23 @@ else:
     from open_files.clean_text import clean_text
 
 def text_extraction(filename):
-    if filename[-4:] == "docx":
-        text = docx2txt.process(filename)
-    elif filename[-4:] == "html":
-        text = open_html(filename)
-    elif filename[-3:] == "pdf":
-        text = open_pdf(filename)
-    else:
-        with open(filename, 'r') as file:
-            text = file.read()
+    try:
+        if filename[-4:] == "docx":
+            text = docx2txt.process(filename)
+        elif filename[-4:] == "html":
+            text = open_html(filename)
+        elif filename[-3:] == "pdf":
+            text = open_pdf(filename)
+        else:
+            with open(filename, 'r', encoding='cp437') as file:
+                text = file.read()
 
-    # remove links, specials signs, emails...
-    text = clean_text(text)
+        # remove links, specials signs, emails...
+        text = clean_text(text)
 
-    return text
+        return text
+    except:
+        return "File not supported"
 
 def text_from_web(url):
     text = open_html(url)

@@ -72,6 +72,5 @@ def webText():
     else:
         return jsonify("server only allows POST")
 
-
 if __name__ == "__main__":
     app.run(debug=True)
