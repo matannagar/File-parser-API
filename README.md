@@ -16,7 +16,7 @@ Create a post request, attach a file and you'll receive plain text.
 import requests 
 
 with open('test.pdf', 'rb') as f:
-	resp = requests.post("https://flask-text-parser.herokuapp.com/plaintext", files={'file': f})
+	resp = requests.post("https://file-parser-quzy.onrender.com/plaintext", files={'file': f})
 
 	print(resp.text)
 ```
